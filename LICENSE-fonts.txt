@@ -1,0 +1,10 @@
+Font yang digunakan pada project ini:
+
+1. Lora (untuk Heading)
+2. Poppins (untuk Body Text)
+
+Kedua font ini adalah open-source dan dirilis di bawah lisensi
+SIL Open Font License 1.1, yang mengizinkan penggunaan bebas
+termasuk untuk keperluan pribadi maupun komersial.
+
+Lisensi lengkap dapat dibaca di: https://openfontlicense.org
