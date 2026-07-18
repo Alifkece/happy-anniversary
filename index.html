@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Untuk Kamu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== AURORA BACKGROUND (canvas, di belakang semua layer) ===================== -->
+  <canvas id="auroraCanvas"></canvas>
+  <div id="particleField"></div>
+
+  <!-- ===================== 1. SPLASH SCREEN ===================== -->
+  <section id="splashScreen" class="layer">
+    <div class="splash-inner">
+      <div class="splash-mark">
+        <span class="icon icon-heart splash-heart"></span>
+      </div>
+      <p class="splash-eyebrow" id="splashEyebrow">Sedang menyiapkan sesuatu</p>
+      <div class="splash-bar"><div class="splash-bar-fill" id="splashBarFill"></div></div>
+      <p class="splash-percent" id="splashPercent">0%</p>
+    </div>
+  </section>
+
+  <!-- ===================== 2. LOCK SCREEN ===================== -->
+  <section id="lockScreen" class="layer hidden">
+    <div class="lock-inner">
+      <div class="lock-icon-wrap">
+        <span class="icon icon-lock lock-icon" id="lockIcon"></span>
+      </div>
+      <p class="lock-greeting" id="lockGreeting">Sebuah persembahan kecil,</p>
+      <h1 class="lock-subgreeting" id="lockSubGreeting">khusus untukmu.</h1>
+      <p class="lock-date" id="lockDate"></p>
+
+      <form id="lockForm" class="lock-form" autocomplete="off">
+        <input type="password" id="lockInput" class="lock-input" placeholder="Masukkan kata kunci" />
+        <button type="submit" class="lock-submit" aria-label="Buka">
+          <span class="icon icon-arrow"></span>
+        </button>
+      </form>
+      <p class="lock-error" id="lockError">Kata kunci belum tepat, coba sekali lagi.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 3. ENVELOPE / GIFT OPENING TRANSITION ===================== -->
+  <section id="envelopeScreen" class="layer hidden">
+    <div class="envelope-wrap">
+      <div class="envelope-glow"></div>
+      <div class="envelope-box" id="envelopeBox">
+        <div class="envelope-flap"></div>
+        <div class="envelope-body"></div>
+        <div class="envelope-heart">
+          <span class="icon icon-heart"></span>
+        </div>
+      </div>
+      <p class="envelope-caption">Membuka kenangan…</p>
+    </div>
+  </section>
+
+  <!-- ===================== MAIN SITE ===================== -->
+  <main id="mainSite" class="hidden">
+
+    <!-- ---------- HERO ---------- -->
+    <section id="hero" class="section hero-section">
+      <video id="heroVideo" class="hero-bg-video hidden" muted loop playsinline></video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content reveal">
+        <p class="eyebrow" id="heroEyebrow">Untuk seseorang yang istimewa</p>
+        <h1 class="hero-title" id="heroTitle">Setiap Detik Bersamamu</h1>
+        <p class="hero-subtitle" id="heroSubtitle"></p>
+        <a href="#gallery" class="btn-primary" id="heroButton">
+          <span id="heroButtonLabel">Buka Kisah Kami</span>
+          <span class="icon icon-arrow"></span>
+        </a>
+      </div>
+      <div class="scroll-hint">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- ---------- GALLERY ---------- -->
+    <section id="gallery" class="section gallery-section">
+      <div class="section-head reveal">
+        <p class="section-tag">Galeri</p>
+        <h2 class="section-title">Kenangan Kita</h2>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="gallery-modal hidden">
+      <button class="modal-close" id="modalClose">
+        <span class="icon icon-close"></span>
+      </button>
+      <button class="modal-nav modal-prev" id="modalPrev">
+        <span class="icon icon-arrow" style="transform:rotate(180deg)"></span>
+      </button>
+      <div class="modal-frame" id="modalFrame">
+        <img id="modalImage" src="" alt="" />
+        <p class="modal-caption" id="modalCaption"></p>
+      </div>
+      <button class="modal-nav modal-next" id="modalNext">
+        <span class="icon icon-arrow"></span>
+      </button>
+    </div>
+
+    <!-- ---------- LOVE LETTER ---------- -->
+    <section id="letter" class="section letter-section">
+      <div class="section-head reveal">
+        <p class="section-tag">Untukmu</p>
+        <h2 class="section-title" id="letterTitle">Sepucuk Surat</h2>
+      </div>
+      <div class="letter-card glass reveal">
+        <p class="letter-body" id="letterBody"></p>
+        <p class="letter-signature" id="letterSignature"></p>
+      </div>
+    </section>
+
+    <!-- ---------- TIMELINE ---------- -->
+    <section id="timeline" class="section timeline-section">
+      <div class="section-head reveal">
+        <p class="section-tag">Perjalanan</p>
+        <h2 class="section-title">Cerita Kita</h2>
+      </div>
+      <div class="timeline-track" id="timelineTrack"></div>
+    </section>
+
+    <!-- ---------- QUOTES ---------- -->
+    <section id="quotes" class="section quotes-section">
+      <div class="quotes-frame glass reveal">
+        <span class="icon icon-heart quote-mark"></span>
+        <p class="quote-text" id="quoteText"></p>
+      </div>
+    </section>
+
+    <!-- ---------- MUSIC SECTION ---------- -->
+    <section id="musicSection" class="section music-section">
+      <div class="section-head reveal">
+        <p class="section-tag">Playlist</p>
+        <h2 class="section-title">Lagu Kita</h2>
+      </div>
+      <div class="playlist-list" id="playlistList"></div>
+    </section>
+
+    <!-- ---------- ENDING ---------- -->
+    <section id="ending" class="section ending-section">
+      <div id="floatingHearts" class="floating-hearts"></div>
+      <div class="ending-content reveal">
+        <h2 class="ending-title" id="endingTitle">Untuk Selamanya,</h2>
+        <p class="ending-message" id="endingMessage"></p>
+        <p class="ending-footer" id="endingFooter"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FLOATING MUSIC PLAYER ===================== -->
+  <div id="musicPlayer" class="music-player hidden">
+    <button id="playerToggle" class="player-toggle">
+      <img id="playerCoverMini" class="player-cover-mini" src="" alt="" />
+    </button>
+
+    <div class="player-panel" id="playerPanel">
+      <div class="player-cover-wrap">
+        <img id="playerCover" class="player-cover" src="" alt="" />
+      </div>
+      <div class="player-info">
+        <p class="player-song" id="playerSong">—</p>
+        <p class="player-artist" id="playerArtist">—</p>
+
+        <div class="player-progress">
+          <span class="player-time" id="playerCurrentTime">0:00</span>
+          <input type="range" id="playerSeek" class="player-seek" min="0" max="100" value="0" />
+          <span class="player-time" id="playerDuration">0:00</span>
+        </div>
+
+        <div class="player-controls">
+          <button id="btnShuffle" class="ctrl-btn ctrl-small" title="Shuffle">
+            <span class="icon icon-shuffle"></span>
+          </button>
+          <button id="btnPrev" class="ctrl-btn" title="Sebelumnya">
+            <span class="icon icon-prev"></span>
+          </button>
+          <button id="btnPlayPause" class="ctrl-btn ctrl-main" title="Play/Pause">
+            <span class="icon icon-play" id="iconPlayPause"></span>
+          </button>
+          <button id="btnNext" class="ctrl-btn" title="Berikutnya">
+            <span class="icon icon-next"></span>
+          </button>
+          <button id="btnRepeat" class="ctrl-btn ctrl-small" title="Repeat">
+            <span class="icon icon-repeat"></span>
+          </button>
+        </div>
+
+        <div class="player-volume">
+          <span class="icon icon-volume" id="iconVolume"></span>
+          <input type="range" id="playerVolume" class="volume-seek" min="0" max="100" value="70" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
